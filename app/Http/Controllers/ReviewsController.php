@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Food;
 use Illuminate\Http\Request;
 
-class Food extends Controller
+class ReviewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +40,10 @@ class Food extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Food  $food
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Food $food)
+    public function show($id)
     {
         //
     }
@@ -52,10 +51,10 @@ class Food extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Food  $food
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Food $food)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +63,10 @@ class Food extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Food  $food
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Food $food)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +74,10 @@ class Food extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Food  $food
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Food $food)
+    public function destroy($id)
     {
         //
     }

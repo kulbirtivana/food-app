@@ -19,7 +19,7 @@ class Reviews extends Model
     	return $this->belongsTo('App\Profile');
     }
 
- 	public function tweets()
+ 	public function food()
     {
     	return $this->belongsTo('App\Food');
     }

@@ -20,7 +20,8 @@ class FoodTableSeeder extends Seeder
 
         foreach(range(1,40 ) as $index){
         	DB::table('food')->insert(array(
-        		'photo' => $faker->imageURL($width = 600, $height = 480),
+        		'foodname' => $faker->name,
+        		'photo' => $faker->imageURL($width = 600, $height = 480, $category = "food"),
         		'ingredients' => $faker->paragraph,
         		'profile_id' => $faker->randomElement(Profile::pluck('id')->toArray()),
 

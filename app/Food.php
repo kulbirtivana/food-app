@@ -18,14 +18,19 @@ class Food extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = array(
+    	'foodname',
     	'photo',
-    	'ingredients',
-    	'profile_id'
+    	'ingredients'
     );
 
     public function profiles()
     {
     	return $this->belongsTo( 'App\Profile');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo( 'App\User');
     }
 
     public function reviews()
