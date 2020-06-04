@@ -12,51 +12,76 @@ FoodApp
 </div>
 @endif
 
+
+<form action="/search" method="POST" role="search">
+{{ csrf_field() }}
+    <div class="input-group">
+        <input type="text" class="form-control" name="foodname"
+        placeholder="Search food here"> <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
+</form>
+
 <div class="container">
     <div class="card">
         <div class="card-header">List of Available Foods</div>
 
-            <ul>@foreach($foods as $food)
-                <div class="container">
-
-                    <div class="row" class="col-sm">
-                    <ul>
+            <div class="container">
+                        <div class="row">
+                            @foreach($foods as $food)
                     
-             {{--<a href="{{ route('profiles.show', $food->profile_id) }}" class="text-dark" class="nav-link"></a>--}} 
+                            <div class="col-4">
+                                 {{--<a href="{{ route('profiles.show', $food->profile_id) }}" class="text-dark" class="nav-link"></a>--}} 
 
-		          <h3>{{$food->foodname }}</h3>
-            <div class="text-center">
-                {{--<img src="{{ asset('img/'.$food->photo) }}" alt="{{$food->foodname }}'s Name"
-                    class="rounded-0"
-                    width=200>--}}
+                    		          <h3>{{$food->foodname }}</h3>
+                                            <div>
 
-                <img src="{{ ($food->photo) }}" alt="{{$food->foodname }}'s Name"
-                    class="rounded-0"
-                    width=200>
-            </div>
-        			<p>
-                    {{ $food->ingredient }}
-                	</p>
-      		@auth
-                <li>			
-                	<a href="{{route('food.edit', $food->id) }}">Edit Food</a>
-                </li>
-                <li>
-                <form action="{{ route('food.destroy', $food->id)}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Delete Food">
-                </form>
+                                            @if((strpos($food->photo, 'http://', 0)===false) && (strpos($food->photo, 'https://', 0)===false))
 
-                {{--<small>{{ $food->posted_at }}</small> --}}
+                                                <img src="{{ asset('img/'.$food->photo) }}" alt="{{$food->foodname }}'s Name"
+                                                    class="rounded-0"
+                                                    width=200>
+                                            @else
 
-            @endauth
-	</li>
-        </ul>
-@endforeach
-    </div>
+                                                <img src="{{ ($food->photo) }}" alt="{{$food->foodname }}'s Name"
+                                                    class="rounded-0"
+                                                    width=200>
+                                            @endif
+                                            </div>
+                                            <ul>
+                            			<li>
+                                        {{ $food->ingredient }}
+                                    	</li>
+                                        <li>            
+                                                <a class="btn btn-primary" href="{{route('food.edit', $food->id) }}">Add to Cart</a>
+                                        </li>
 
-</div>
+                                  		@auth
+                                            <li>			
+                                            	<a href="{{route('food.edit', $food->id) }}">Edit Food</a>
+                                            </li>
+                                            <li>
+                                            <form action="{{ route('food.destroy', $food->id)}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="submit" value="Delete Food">
+                                            </form>
+
+                                            {{--<small>{{ $food->posted_at }}</small> --}}
+
+                                        @endauth
+                            	           </li>
+                                    </ul>
+                        </div>
+
+                @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 {{--<div class="row">
     <div class="col-12 text-enter">

@@ -88,9 +88,10 @@ class FoodController extends Controller
          );
 
         }
-            $profile = Profile::where("user_id", "=", $user->id)->firstOrFail();
+            //$profile = User::where("user_id", "=", $user->id)->firstOrFail();
             $food = new Food;
             $food->user_id = $user->id;
+            $food->foodname = $validatedData['foodname'];
             $food->ingredients = $validatedData['ingredients'];
             $food->photo = $fileName;
             $food->save();  
@@ -111,7 +112,7 @@ class FoodController extends Controller
         //
          $food = Food::findOrFail($id);
 
-        $profile = profile::findOrFail($food->profile_id);
+        $profile = Profile::findOrFail($food->profile_id);
         return view('food.show', compact('food'),
         compact('profile'));
     }

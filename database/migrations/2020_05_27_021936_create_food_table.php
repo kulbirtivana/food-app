@@ -18,7 +18,7 @@ class CreateFoodTable extends Migration
             $table->string('foodname');
             $table->string('photo')->nullable();
             $table->longText('ingredients');
-            $table->unsignedBigInteger('profile_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->softDeletes();
 
 

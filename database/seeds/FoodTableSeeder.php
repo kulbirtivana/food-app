@@ -23,7 +23,7 @@ class FoodTableSeeder extends Seeder
         		'foodname' => $faker->name,
         		'photo' => $faker->imageURL($width = 600, $height = 480, $category = "food"),
         		'ingredients' => $faker->paragraph,
-        		'profile_id' => $faker->randomElement(Profile::pluck('id')->toArray()),
+        		'user_id' => $faker->randomElement(User::pluck('id')->toArray()),
 
 
         	));

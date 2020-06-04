@@ -20,7 +20,8 @@ class Food extends Model
     protected $fillable = array(
     	'foodname',
     	'photo',
-    	'ingredients'
+    	'ingredients',
+        
     );
 
     public function profiles()
