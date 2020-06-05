@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\User;
+use Illuminate\Support\Facades\Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +25,7 @@ Auth::routes();
 Route::resource('food', 'FoodController');
 
 Route::resource('profiles', 'ProfileController');
+
+Route::post('/food/search', 'SearchController@search')->name('search');
+
+// Route::get('/', 'CartController@shop')->name('shop');

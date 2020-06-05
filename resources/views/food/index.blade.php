@@ -13,10 +13,10 @@ FoodApp
 @endif
 
 
-<form action="/search" method="POST" role="search">
+<form action="{{route('search')}}" method="post" role="search">
 {{ csrf_field() }}
     <div class="input-group">
-        <input type="text" class="form-control" name="foodname"
+        <input type="text" class="form-control" name="q"
         placeholder="Search food here"> <span class="input-group-btn">
             <button type="submit" class="btn btn-default">
                 <span class="glyphicon glyphicon-search"></span>
@@ -25,71 +25,137 @@ FoodApp
     </div>
 </form>
 
-<div class="container">
-    <div class="card">
-        <div class="card-header">List of Available Foods</div>
+ @if((strpos($_SERVER['REQUEST_URI'],'search') !== false))
 
             <div class="container">
-                        <div class="row">
-                            @foreach($foods as $food)
-                    
-                            <div class="col-4">
-                                 {{--<a href="{{ route('profiles.show', $food->profile_id) }}" class="text-dark" class="nav-link"></a>--}} 
+                @if(isset($details))
+                <div class="container">
+                <div class="card">
+                    <div class="card-header">List of Available Foods related to your search -{{ $query }} are</div>
 
-                    		          <h3>{{$food->foodname }}</h3>
-                                            <div>
+                        <div class="container">
+                                    <div class="row">
+                                        @foreach($foods as $food)
+                                
+                                        <div class="col-4">
+                                                  <h3>{{$food->foodname }}</h3>
+                                                        <div>
 
-                                            @if((strpos($food->photo, 'http://', 0)===false) && (strpos($food->photo, 'https://', 0)===false))
+                                                        @if((strpos($food->photo, 'http://', 0)===false) && (strpos($food->photo, 'https://', 0)===false))
 
-                                                <img src="{{ asset('img/'.$food->photo) }}" alt="{{$food->foodname }}'s Name"
-                                                    class="rounded-0"
-                                                    width=200>
-                                            @else
+                                                            <img src="{{ asset('img/'.$food->photo) }}" alt="{{$food->foodname }}'s Name"
+                                                                class="rounded-0"
+                                                                width=200>
+                                                        @else
 
-                                                <img src="{{ ($food->photo) }}" alt="{{$food->foodname }}'s Name"
-                                                    class="rounded-0"
-                                                    width=200>
-                                            @endif
+                                                            <img src="{{ ($food->photo) }}" alt="{{$food->foodname }}'s Name"
+                                                                class="rounded-0"
+                                                                width=200>
+                                                        @endif
+                                                        </div>
+                                                        <ul>
+                                                    <li>
+                                                    {{ $food->ingredient }}
+                                                    </li>
+                                                    <li>            
+                                                            <a class="btn btn-primary" href="{{route('food.edit', $food->id) }}">Add to Cart</a>
+                                                    </li>
+
+                                                    @auth
+                                                        <li>            
+                                                            <a href="{{route('food.edit', $food->id) }}">Edit Food</a>
+                                                        </li>
+                                                        <li>
+                                                        <form action="{{ route('food.destroy', $food->id)}}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="submit" value="Delete Food">
+                                                        </form>
+
+                                                        {{--<small>{{ $food->posted_at }}</small> --}}
+
+                                                    @endauth
+                                                       </li>
+                                                </ul>
+                                    </div>
+
+                            @endforeach
                                             </div>
-                                            <ul>
-                            			<li>
-                                        {{ $food->ingredient }}
-                                    	</li>
-                                        <li>            
-                                                <a class="btn btn-primary" href="{{route('food.edit', $food->id) }}">Add to Cart</a>
-                                        </li>
+                                        </div>
+                                    </div>
+                                </div>
+                @endif
+            </div>
+@else
+    <div class="container">
+        <div class="card">
+            <div class="card-header">List of Available Foods</div>
 
-                                  		@auth
-                                            <li>			
-                                            	<a href="{{route('food.edit', $food->id) }}">Edit Food</a>
-                                            </li>
+                <div class="container">
+                            <div class="row">
+                                @foreach($foods as $food)
+                        
+                                <div class="col-4">
+                                     {{--<a href="{{ route('profiles.show', $food->profile_id) }}" class="text-dark" class="nav-link"></a>--}} 
+
+                        		          <h3>{{$food->foodname }}</h3>
+                                                <div>
+
+                                                @if((strpos($food->photo, 'http://', 0)===false) && (strpos($food->photo, 'https://', 0)===false))
+
+                                                    <img src="{{ asset('img/'.$food->photo) }}" alt="{{$food->foodname }}'s Name"
+                                                        class="rounded-0"
+                                                        width=200>
+                                                @else
+
+                                                    <img src="{{ ($food->photo) }}" alt="{{$food->foodname }}'s Name"
+                                                        class="rounded-0"
+                                                        width=200>
+                                                @endif
+                                                </div>
+                                                <ul>
+                                			<li>
+                                            {{ $food->ingredient }}
+                                        	</li>
                                             <li>
-                                            <form action="{{ route('food.destroy', $food->id)}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input type="submit" value="Delete Food">
-                                            </form>
+                                                {{ $food->price}}
+                                            </li>
+                                            <li>            
+                                                    <a class="btn btn-primary" href="{{route('food.edit', $food->id) }}">Add to Cart</a>
+                                            </li>
 
-                                            {{--<small>{{ $food->posted_at }}</small> --}}
+                                      		@auth
+                                                <li>			
+                                                	<a href="{{route('food.edit', $food->id) }}">Edit Food</a>
+                                                </li>
+                                                <li>
+                                                <form action="{{ route('food.destroy', $food->id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="submit" value="Delete Food">
+                                                </form>
 
-                                        @endauth
-                            	           </li>
-                                    </ul>
-                        </div>
+                                                {{--<small>{{ $food->posted_at }}</small> --}}
 
-                @endforeach
+                                            @endauth
+                                	           </li>
+                                        </ul>
+                            </div>
+
+                    @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+@endif
 
-{{--<div class="row">
-    <div class="col-12 text-enter">
-    {{ $foods->links() }}
-    </div>
-	</div>--}}
+    {{--<div class="row">
+        <div class="col-12 text-enter">
+        {{ $foods->links() }}
+        </div>
+    	</div>--}}
 
-	@endsection
+    	@endsection
 
 	</div>
 
