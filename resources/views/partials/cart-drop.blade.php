@@ -35,7 +35,7 @@
     </li>
     <br>
     <div class="row" style="margin: 0px;">
-        <a class="btn btn-dark btn-sm btn-block" href="{{ route('cart.index') }}">
+        <a class="btn btn-dark btn-sm btn-block" href="{{ route('cart') }}">
             CART <i class="fa fa-arrow-right"></i>
         </a>
         <a class="btn btn-dark btn-sm btn-block" href="">

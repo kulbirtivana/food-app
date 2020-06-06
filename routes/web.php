@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\User;
+use App\Food;
 use Illuminate\Support\Facades\Input;
 
 /*
@@ -32,7 +33,7 @@ Route::post('/food/search', 'SearchController@search')->name('search');
 
 Route::get('/cart', 'CartController@cart')->name('cart');
 
-Route::post('/add', 'CartController@add')->name('cart.store');
+Route::get('/add', 'CartController@add')->name('cart.add');
 
 Route::post('/update', 'CartController@update')->name('cart.update');
 

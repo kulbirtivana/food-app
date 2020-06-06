@@ -58,7 +58,7 @@ FoodApp
                                                     {{ $food->ingredient }}
                                                     </li>
                                                     <li>            
-                                                            <a class="btn btn-primary" href="{{route('cart', ['id'=>$food->id]) }}">Add to Cart</a>
+                                                            <a class="btn btn-primary" href="{{route('cart.add', ['id'=>$food->id]) }}">Add to Cart</a>
                                                     </li>
 
                                                     @auth
@@ -121,7 +121,7 @@ FoodApp
                                                 ${{($food->price)}}
                                             </li>
                                             <li>            
-                                                    <a class="btn btn-primary" href="{{route('cart', ['id'=>$food->id]) }}">Add to Cart</a>
+                                                    <a class="btn btn-primary" href="{{route('cart.add', ['id'=>$food->id]) }}">Add to Cart</a>
                                             </li>
 
                                       		@auth

@@ -13,7 +13,7 @@
     </head>
 
     <body>
-        {{--@include('partials.navigation')--}}
+        @include('partials.navigation')
         <h1>
             @yield('title')
         </h1>

@@ -3,7 +3,7 @@
     <div class="container" style="margin-top: 80px">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Shop</a></li>
+                <li class="breadcrumb-item"><a href="food">Shop</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Cart</li>
             </ol>
         </nav>
@@ -40,14 +40,16 @@
                     <h4>{{ \Cart::getTotalQuantity()}} Food(s) In Your Cart</h4><br>
                 @else
                     <h4>No Food(s) In Your Cart</h4><br>
-                    <a href="/" class="btn btn-dark">Continue Shopping</a>
+                    <a href="food" class="btn btn-dark">Continue Shopping</a>
                 @endif
 
                 @foreach($cartCollection as $item)
                     <div class="row">
-                        <div class="col-lg-3">
+                            
+                            {{-- 
+                            <div class="col-lg-3">
 
-                            @if((strpos($food->photo, 'http://', 0)===false) && (strpos($food->photo, 'https://', 0)===false))
+                           @if((strpos($food->photo, 'http://', 0)===false) && (strpos($food->photo, 'https://', 0)===false))
 
                                 <img src="{{ asset('img/'.$food->photo) }}" alt="{{$food->foodname }}'s Name"
                                     class="img-thumbnail" width="200" height="200">
@@ -57,12 +59,14 @@
                                     class="img-thumbnail" width="200" height="200">
                             @endif
                         </div>
+                        --}}
 
-                           {{--<img src="/images/{{ $item->attributes->image }}" class="img-thumbnail" width="200" height="200">--}} 
+                           <img src="{{ $item->attributes->image }}" class="img-thumbnail" width="200" height="200">
 
                         <div class="col-lg-5">
                             <p>
-                                <b><a href="/shop/{{ $item->attributes->slug }}">{{ $item->foodname }}</a></b><br>
+                                <b><a href="/food/{{ $item->attributes->slug }}">{{ $item->name }}</a></b><br>
+                                
                                 <b>Price: </b>${{ $item->price }}<br>
                                 <b>Sub Total: </b>${{ \Cart::get($item->id)->getPriceSum() }}<br>
                                 {{--                                <b>With Discount: </b>${{ \Cart::get($item->id)->getPriceSumWithConditions() }}--}}
@@ -103,7 +107,7 @@
                             <li class="list-group-item"><b>Total: </b>${{ \Cart::getTotal() }}</li>
                         </ul>
                     </div>
-                    <br><a href="/shop" class="btn btn-dark">Continue Shopping</a>
+                    <br><a href="{{ route( 'food.index') }}" class="btn btn-dark">Continue Shopping</a>
                     <a href="/checkout" class="btn btn-success">Proceed To Checkout</a>
                 </div>
             @endif
