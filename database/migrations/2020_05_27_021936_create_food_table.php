@@ -17,8 +17,9 @@ class CreateFoodTable extends Migration
             $table->id();
             $table->string('foodname');
             $table->string('photo')->nullable();
+            $table->string('slug')->unique();
             $table->longText('ingredients');
-            $table->string('price');
+            $table->float('price');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->softDeletes();
 

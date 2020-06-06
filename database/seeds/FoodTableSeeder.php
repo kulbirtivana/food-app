@@ -22,6 +22,7 @@ class FoodTableSeeder extends Seeder
         	DB::table('food')->insert(array(
         		'foodname' => $faker->name,
         		'photo' => $faker->imageURL($width = 600, $height = 480, $category = "food"),
+                'slug' => $faker->slug,
         		'ingredients' => $faker->paragraph,
                 'price' => $faker->randomFloat(2,0,6),
         		'user_id' => $faker->randomElement(User::pluck('id')->toArray()),

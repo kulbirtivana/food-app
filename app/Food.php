@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
+
 class Food extends Model
 {
     //
     use SoftDeletes;
+
+    // use Sluggable;
 
     public $timestamps = false;
 
@@ -21,8 +24,18 @@ class Food extends Model
     	'foodname',
     	'photo',
     	'ingredients',
+        'slug'
         
     );
+
+    //  public function sluggable()
+    // {
+    //     return [
+    //         'slug' => [
+    //             'source' => 'title'
+    //         ]
+    //     ];
+    // }
 
     public function profiles()
     {
@@ -39,4 +52,15 @@ class Food extends Model
     {
     	return $this->hasMany(Reviews::class)->whereNull('parent_id');
     }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'foodname'
+            ]
+        ];
+    }
+
+
 }
