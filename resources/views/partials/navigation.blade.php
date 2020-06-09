@@ -9,8 +9,10 @@
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
         <figure  >
-                <img class=".img-responsive" hspace="18" alt="logo" src="{{ asset('img/food-app-logo.png')}}">
+                <a href="{{ route( 'food.index') }}"><img class=".img-responsive" hspace="18" alt="logo" src="{{ asset('img/food-app-logo-3.png')}}"></a>
             </figure>
+            <br>
+            <h2>FoodApp</h2>
         </li>
 
       <li class="nav-item active">
@@ -77,10 +79,13 @@
     <div class="form-inline my-2 my-lg-0">
         <form action="{{route('search')}}" method="post" role="search">
         {{ csrf_field() }}
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <div class="input-group">
+      <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search Food Here"><span class="input-group-btn">
        <button type="submit" class="btn btn-default">
                 <span class="glyphicon glyphicon-search"></span>
         </button>
+    </span>
+        </div>
         </form>
     </div>
 </nav>

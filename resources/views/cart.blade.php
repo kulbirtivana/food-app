@@ -108,7 +108,7 @@
                         </ul>
                     </div>
                     <br><a href="{{ route( 'food.index') }}" class="btn btn-dark">Continue Shopping</a>
-                    <a href="/checkout" class="btn btn-success">Proceed To Checkout</a>
+                    <a href="{{ route( 'checkout.index')}}" class="btn btn-success">Proceed To Checkout</a>
                 </div>
             @endif
         </div>

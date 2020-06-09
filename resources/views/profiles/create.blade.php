@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-Supplier's can register here
+Register Here
 @endsection
 
 @section('content')

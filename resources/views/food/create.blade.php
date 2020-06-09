@@ -6,7 +6,7 @@
 	@section('content')
 	<p>Enter the details about your food</p>
 
-	{{--@include('partials.errors')--}}
+	@include('partials.errors')
 
 	<div class="container-fluid">
     	<div class="row h-100 justify-content-center align-items-center">
@@ -23,14 +23,21 @@
 				<strong>Enter the ingredients detail</strong>
 				<textarea class="form-control" placeholder="Enter the name of your food item" id="ingredients" name="ingredients" cols="30" rows="10"></textarea>
 			</label>
+			<br>
+
+			 <label for ="price">
+				<strong>Price</strong>
+				<input type="text" id="price" name="price">
+			</label>
 
 
-			  <div class="form-group row">
+			<div class="form-group row">
 		        <label for="photo" class="form-control">Add image of your food</label>
 
 		        <div class="col-md-6">
 		            <input type="file" class="form-control" name="photo" accept="image/*" onchange="readURL(this)">
 		        </div>
+
 		        </div>
 	
 		<!-- <input type="submit" Value="Publish Tweet">

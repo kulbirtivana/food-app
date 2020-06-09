@@ -30,68 +30,13 @@ class CartController extends Controller
     }
 
 
-
-// public function add($id)
-//     {
-//        $food = Food::find($id);
- 
-//         if(!$food) {
- 
-//             abort(404);
- 
-//         }
- 
-//         $cart = session()->get('cart');
- 
-//         // if cart is empty then this the first product
-//         if(!$cart) {
- 
-//             $cart = [
-//                     $id => [
-//                         "foodname" => $food->foodname,
-//                         "quantity" => 1,
-//                         "price" => $food->price,
-//                         "photo" => $food->photo
-//                     ]
-//             ];
- 
-//             session()->put('cart', $cart);
- 
-//             return redirect()->back()->with('success', 'Product added to cart successfully!');
-//         }
- 
-//         // if cart not empty then check if this product exist then increment quantity
-//         if(isset($cart[$id])) {
- 
-//             $cart[$id]['quantity']++;
- 
-//             session()->put('cart', $cart);
- 
-//             return redirect()->back()->with('success', 'Product added to cart successfully!');
- 
-//         }
- 
-//         // if item not exist in cart then add to cart with quantity = 1
-//         $cart[$id] = [
-//             "foodname" => $food->foodname,
-//             "quantity" => 1,
-//             "price" => $product->price,
-//             "photo" => $product->photo
-//         ];
- 
-//         session()->put('cart', $cart);
- 
-//         return redirect()->back()->with('success', 'Product added to cart successfully!');
-//     }
-
-
     public function remove(Request $request){
         Cart::remove($request->id);
         return redirect()->route('cart')->with('success_msg', 'Item is removed!');
     }
 
     public function update(Request $request){
-        \Cart::update($request->id,
+        Cart::update($request->id,
             array(
                 'quantity' => array(
                     'relative' => false,
@@ -102,7 +47,7 @@ class CartController extends Controller
     }
 
     public function clear(){
-        \Cart::clear();
+        Cart::clear();
         return redirect()->route('cart')->with('success_msg', 'Car is cleared!');
     }
 }

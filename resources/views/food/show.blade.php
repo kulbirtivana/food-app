@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-Show Food
+
 @endsection
 @section('content')
 
@@ -11,26 +11,55 @@ Show Food
             <div class="card">
                 <div class="card-body">
 
-                	{{--@include('partials.errors')--}}
+                	@include('partials.errors')
 
-                    <h2>{{$profile->username ?? ''}}</h2>
+                    <h2>{{$food->foodname}}</h2>
                     <p>
-                       <strong> Available Foods are: </strong>
-                    <br>
-                    <div class="card-body"> 
+
+                        @if((strpos($food->photo, 'http://', 0)===false) && (strpos($food->photo, 'https://', 0)===false))
+
+                            <img src="{{ asset('img/'.$food->photo) }}" alt="{{$food->foodname }}'s Name" class="rounded-0" width=200>
+                        @else
+
+                            <img src="{{ ($food->photo) }}" alt="{{$food->foodname }}'s Name"
+                                class="rounded-0"
+                                width=200>
+                            </div>
+
+                        @endif
                     <p>{{ $food->ingredients }}</p>
                     </p>
-                      
+
+                    <ul style="list-style: none;">
+                                                    <li>
+                                                    {{ $food->ingredient }}
+                                                    </li>
+                                                     <li>
+                                                        Price: ${{($food->price)}}
+                                                    </li>
+                                           
+                                                    <li>            
+                                                            <a class="btn btn-primary" href="{{route('cart.add', ['id'=>$food->id]) }}">Add to Cart</a>
+                                                    </li>
+
+                                                    @auth
+                                                        <li>            
+                                                            <a href="{{route('food.edit', $food->id) }}">Edit Food</a>
+                                                        </li>
+                                                        <li>
+                                                        <form action="{{ route('food.destroy', $food->id)}}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="submit" value="Delete Food">
+                                                        </form>
+
+                                                        {{--<small>{{ $food->posted_at }}</small> --}}
+
+                                                    @endauth
+                                                       </li>
+                                                </ul>
+                                    </div>                      
                     
-  {{--  <a href="{{route('comments.show', $tweet->id)}}" id="reply"></a>
-                 
-                    <div id="app">
-                        <comment-create-form submission-url="{{route('comments.store')}}" tweet-id="{{ $tweet->id }}" v-model="content">
-                            @csrf
-                        </comment-create-form>
-                        <Giphy v-on:image-clicked="imageClicked"/>
-                </div>
-    --}}
             </div>
 
         </div>

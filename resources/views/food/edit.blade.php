@@ -7,7 +7,7 @@ Edit Food
 @section('content')
 <h1 class="text-center"> Use this form to edit a food item</h1>
 
-{{--@include('partials.errors')--}}
+@include('partials.errors')
 
 <div class="container-fluid">
     <div class="row h-100 justify-content-center align-items-center">
@@ -28,6 +28,11 @@ Edit Food
 				<strong>Enter the ingredients detail</strong>
 				<textarea class="form-control" name="ingredients" id="ingredients" name="ingredients" cols="30" rows="10">{{ $food->ingredients }}</textarea>
 			</label>
+			<br>
+			<label for ="price">
+				<strong>Price</strong>
+				<textarea class="form-control" type="text" id="price" name="price" cols="2" rows="2">{{$food->price}}
+			</textarea>			</label>
 
 			<div class="form-group row">
 		        <label for="photo" class="form-control">{{ __('Add image of your food')}}</label>

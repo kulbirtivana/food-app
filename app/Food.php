@@ -24,7 +24,7 @@ class Food extends Model
     	'foodname',
     	'photo',
     	'ingredients',
-        'slug'
+        'price'
         
     );
 

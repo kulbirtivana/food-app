@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('title')
-FoodApp
 @endsection
 
 @section('content')
@@ -13,7 +12,7 @@ FoodApp
 @endif
 
 
-<form action="{{route('search')}}" method="post" role="search">
+{{--<form action="{{route('search')}}" method="post" role="search">
 {{ csrf_field() }}
     <div class="input-group">
         <input type="text" class="form-control" name="q"
@@ -23,7 +22,7 @@ FoodApp
             </button>
         </span>
     </div>
-</form>
+</form>--}}
 
  @if((strpos($_SERVER['REQUEST_URI'],'search') !== false))
 
@@ -38,8 +37,8 @@ FoodApp
                                         @foreach($foods as $food)
                                 
                                         <div class="col-4">
-                                                  <h3>{{$food->foodname }}</h3>
-                                                        <div>
+                                                  <h3>{{$food->foodname }}</a></h3>
+                                                        <div class="foodphoto">
 
                                                         @if((strpos($food->photo, 'http://', 0)===false) && (strpos($food->photo, 'https://', 0)===false))
 
@@ -113,16 +112,14 @@ FoodApp
                                                         width=200>
                                                 @endif
                                                 </div>
-                                                <ul>
+                                                <ul style="list-style: none;">
                                 			<li>
                                             {{ $food->ingredient }}
                                         	</li>
                                             <li>
                                                 ${{($food->price)}}
                                             </li>
-                                            <li>            
-                                                    <a class="btn btn-primary" href="{{route('cart.add', ['id'=>$food->id]) }}">Add to Cart</a>
-                                            </li>
+                                           
 
                                       		@auth
                                                 <li>			
@@ -134,6 +131,10 @@ FoodApp
                                                     @method('DELETE')
                                                     <input type="submit" value="Delete Food">
                                                 </form>
+
+                                                 <li>            
+                                                    <a class="btn btn-primary" href="{{route('cart.add', ['id'=>$food->id]) }}">Add to Cart</a>
+                                            </li>
 
                                                 {{--<small>{{ $food->posted_at }}</small> --}}
 

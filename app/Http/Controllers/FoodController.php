@@ -58,7 +58,8 @@ class FoodController extends Controller
         {
             $validatedData = $request->validate(array(
                 'foodname' =>  'required|max:25',
-                'ingredients' => 'required|max:255'
+                'ingredients' => 'required|max:500',
+                'price' => 'required|max:5'
                ));
 
 
@@ -94,6 +95,7 @@ class FoodController extends Controller
             $food->foodname = $validatedData['foodname'];
             $food->ingredients = $validatedData['ingredients'];
             $food->photo = $fileName;
+            $food->price = $validatedData['price'];
             $food->save();  
             return redirect('/food')->with('success', 'Food is saved');
             }
@@ -110,11 +112,17 @@ class FoodController extends Controller
     public function show($id)
     {
         //
-         $food = Food::findOrFail($id);
+        $food = Food::findOrFail($id);
 
-        $profile = Profile::findOrFail($food->profile_id);
-        return view('food.show', compact('food'),
-        compact('profile'));
+        $user = User::findOrFail($food->user_id);
+
+        $profile = Profile::where("user_id", "=", "$user->id")->firstOrFail();
+
+        return view('food.show', compact('food', 'profile', 'user'));
+
+        // $profile = Profile::findOrFail($food->profile_id);
+        // return view('food.show', compact('food'),
+        // compact('profile'));
     }
 
     /**
